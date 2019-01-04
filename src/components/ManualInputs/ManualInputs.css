@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|ZCOOL+KuaiLe');
+
+
+.xInput, .zInput, .yInput, .amountInput{
+    height: 25px;
+    width: 150px;
+    display: flex;
+    position: fixed;
+    align-content: flex-start;
+    color: rgb(143, 142, 142);
+    text-align: center;
+    font-family: 'Josefin Sans';
+}
+
+.xInput{
+    left: 37%;
+    transform: translate(-50%, -50%);
+}
+
+.zInput{
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.yInput{
+    left: 63%;
+    transform: translate(-50%, -50%);
+}
+
+.amountInput {
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 50px;
+}
+
+.Button{
+    display: block;
+    width: 100px;
+    height: 40px;
+    position: fixed;
+    border-color: black;
+    align-content: flex-start;
+    margin-top: 120px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: black;
+    background-color: white;
+    padding: 3px;
+    font-family: 'Josefin Sans';
+}
+
+.Button:hover{
+    border-color: grey;
+    box-shadow: 3px 3px black;
+    padding: 10px;
+}
+
+.xInput:hover, .zInput:hover, .yInput:hover, .amountInput:hover{
+    box-shadow: 3px 3px black;
+    font-weight: bold;
+    border-color: black;
+}
+
+
+@media only screen and (max-width: 950px){
+    .xInput, .zInput, .yInput, .amountInput {
+        left: 50%;
+    }
+    .zInput{
+        margin-top: 50px;
+    }
+    .yInput{
+        margin-top:100px;
+    }
+
+    .amountInput{
+        margin-top: 150px;
+    }
+
+    .Button{
+        margin-top: 220px;
+    }
+}

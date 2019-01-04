@@ -1,0 +1,21 @@
+
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|ZCOOL+KuaiLe');
+
+.InputLayout{
+    width: 250px;
+    margin: 15px auto;
+    color: grey;
+    border: 2px solid grey;
+    padding: 10px;
+    text-align: center;
+    font-family: 'Josefin Sans';
+    border-top-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    
+}
+
+.InputLayout:hover{
+    box-shadow: 3px 3px black;
+    font-weight: bold;
+    padding:8px;
+}

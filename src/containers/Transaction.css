@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|ZCOOL+KuaiLe');
+
+.h1{
+    text-align: center;
+    font-family: 'Josefin Sans';
+    margin-bottom: 40px;
+}
+
+.resultborder{
+    width:  auto;
+    display: block;
+    height: auto;
+    background-color: #f9f9f9;
+    border-radius: 300px;
+    padding: 5px;
+    margin-bottom: 50px;
+}
+
+.resultborder:hover{
+    background-color: #efefef;
+}
+
+.errorMessage{
+    color: red;
+    position: inherit;
+    text-align: center;
+    padding-bottom:20px;
+}
