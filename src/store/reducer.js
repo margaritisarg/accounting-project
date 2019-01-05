@@ -18,11 +18,12 @@ const reducer = (state = initialReducer, action) => {
         };
     }
 
-    // if(action.type === 'DELETEITEM'){
-    //     const newState = this.state.transactionInputs.filter(
-    //         transInputs => transInputs.id !== action.selectedEntrysID);
-	// 	this.setState({transactionInputs: newState})
-    // }
+    if(action.type === 'DELETEITEM'){
+        return{
+            ...state.transactionInputs,
+            transactionInputs : state.transactionInputs.filter(transInputs => transInputs.id !== action.selectedEntrysID)
+        }      
+    }
 
     return state;
 };

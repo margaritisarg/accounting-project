@@ -33,42 +33,42 @@ class Transactions extends Component{
 	};
 
 
-	addEntry = () => {
-        const xPartyInput = this.state.xPartyinputValue;
-        const zPartyInput = this.state.zPartyinputValue;
-		const yActioninput = this.state.yActioninputvalue;
-		const amountinput = this.state.amountinputvalue;
+	// addEntry = () => {
+    //     const xPartyInput = this.state.xPartyinputValue;
+    //     const zPartyInput = this.state.zPartyinputValue;
+	// 	const yActioninput = this.state.yActioninputvalue;
+	// 	const amountinput = this.state.amountinputvalue;
 		
-		if(yActioninput === null || zPartyInput == null || xPartyInput == null || amountinput == null ||
-			yActioninput === '' || zPartyInput === '' || xPartyInput === '' || amountinput === ''){
+	// 	if(yActioninput === null || zPartyInput == null || xPartyInput == null || amountinput == null ||
+	// 		yActioninput === '' || zPartyInput === '' || xPartyInput === '' || amountinput === ''){
 
-			this.setState({emptyInputs: true});
+	// 		this.setState({emptyInputs: true});
 			
-		}else{
-			const newTransactionInput = {
-				id: Math.random(),
-				xParty: xPartyInput,
-				yAction: yActioninput,
-				zParty: zPartyInput,
-				amount: amountinput
-			};
-			this.setState({
-				...this.state,
-				transactionInputs: [...this.state.transactionInputs, newTransactionInput],
-				xPartyinput: null,
-				zPartyinput: null,
-				yActioninput: null,
-				amountinput: null
-			});
-			this.setState({emptyInputs: false});
-			console.log(this.state.transactionInputs);
-		}
-	};
+	// 	}else{
+	// 		const newTransactionInput = {
+	// 			id: Math.random(),
+	// 			xParty: xPartyInput,
+	// 			yAction: yActioninput,
+	// 			zParty: zPartyInput,
+	// 			amount: amountinput
+	// 		};
+	// 		this.setState({
+	// 			...this.state,
+	// 			transactionInputs: [...this.state.transactionInputs, newTransactionInput],
+	// 			xPartyinput: null,
+	// 			zPartyinput: null,
+	// 			yActioninput: null,
+	// 			amountinput: null
+	// 		});
+	// 		this.setState({emptyInputs: false});
+	// 		console.log(this.state.transactionInputs);
+	// 	}
+	// };
 
-	deleteItem = selectedEntrysID => {
-		const newState = this.state.transactionInputs.filter(transInputs => transInputs.id !== selectedEntrysID);
-		this.setState({transactionInputs: newState})
-	}
+	// deleteItem = selectedEntrysID => {
+	// 	const newState = this.state.transactionInputs.filter(transInputs => transInputs.id !== selectedEntrysID);
+	// 	this.setState({transactionInputs: newState})
+	// }
 
     render(){		
 		let emptyBoxes = this.state.emptyInputs ? <p className={classes.errorMessage}>Enter a valid input</p>
@@ -86,7 +86,7 @@ class Transactions extends Component{
 								zParty={data.zParty}
 								yAction={data.yAction}
 								amount={data.amount}
-								deleteItem={() => this.deleteItem(data.id)}/>
+								deleteItem={() => this.props.deleteItem(data.id)}/>
 						);
 					})}
 				</div>
@@ -126,14 +126,14 @@ const mapDispatchToProps = dispatch => {
         submitResults: (xParty, zParty, yAction, amount) => dispatch({type: 'SUBMIT', x: {
             id: Math.random(),
             xParty: xParty,
-            yAction: zParty,
-            zParty: yAction,
+            yAction: yAction,
+            zParty: zParty,
             amount: amount
         }
 		}),
 		
-		deleteItems: () => dispatch({type: 'DELETEITEM', 
-		selectedEntrysID: 1 
+		deleteItem: (selectedEntrysID) => dispatch({type: 'DELETEITEM', 
+		selectedEntrysID: selectedEntrysID
 		})
     };
 };
