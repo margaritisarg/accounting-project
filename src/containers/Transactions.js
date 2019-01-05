@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Aux from '../hoc/Aux';
 import Inputs from '../components/Inputs/Inputs';
 import ManualInputs from '../components/ManualInputs/ManualInputs';
-import classes from './Transaction.css'
+import classes from './Transaction.css';
+import { connect } from 'react-redux';
 
 class Transactions extends Component{
     state = {
@@ -77,7 +78,7 @@ class Transactions extends Component{
                 <h1 className={classes.h1}>Transaction page</h1>
 
 				<div className={classes.resultborder}>
-					{this.state.transactionInputs.map(data => {
+					{this.props.transInput.transactionInputs.map(data => {
 						return (
 							<Inputs
 								key={data.id}
@@ -93,8 +94,10 @@ class Transactions extends Component{
 				{emptyBoxes}
 
 				<ManualInputs
-					addEntry={this.addEntry}
-					//submitResults={this.submitResults()}
+					submitResults={() => this.props.submitResults(this.state.xPartyinputValue, 
+							this.state.zPartyinputValue,
+							this.state.yActioninputvalue,
+							this.state.amountinputvalue)}
 
 					xPartyinputValue={this.state.xPartyinputValue}
 					zPartyinputValue={this.state.zPartyinputValue}
@@ -105,11 +108,34 @@ class Transactions extends Component{
 					handleChangeZParty={this.handleChangeZParty}
 					handleChangeyAction={this.handleChangeyAction}
 				/>
-            </Aux>
-            
+			</Aux>       
+			
         );
     }
-
 }
 
-export default Transactions;
+const mapStateToProps = state => {
+	return {
+		transInput: state
+	};
+};
+
+const mapDispatchToProps = dispatch => {
+
+    return {
+        submitResults: (xParty, zParty, yAction, amount) => dispatch({type: 'SUBMIT', x: {
+            id: Math.random(),
+            xParty: xParty,
+            yAction: zParty,
+            zParty: yAction,
+            amount: amount
+        }
+		}),
+		
+		deleteItems: () => dispatch({type: 'DELETEITEM', 
+		selectedEntrysID: 1 
+		})
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Transactions);

@@ -11,16 +11,19 @@ const initialReducer = {
 
 const reducer = (state = initialReducer, action) => {
 
-    //FIGRE OUT HOW TO PASS VALUES FROM INPUT TO HERE
-    console.log(state.transactionInputs);
-    console.log(action.x);
-
     if(action.type === 'SUBMIT'){
         return{
              ...state.transactionInputs,
              transactionInputs: state.transactionInputs.concat(action.x)
         };
     }
+
+    // if(action.type === 'DELETEITEM'){
+    //     const newState = this.state.transactionInputs.filter(
+    //         transInputs => transInputs.id !== action.selectedEntrysID);
+	// 	this.setState({transactionInputs: newState})
+    // }
+
     return state;
 };
 
