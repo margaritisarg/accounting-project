@@ -17,8 +17,6 @@ class Transactions extends Component{
 
 	handleChangeXParty = value => {
 		this.setState({ ...this.state, xPartyinputValue: value });
-		console.log(value)
-		console.log(this.state)
 	};
 
     handleChangeZParty = value => {

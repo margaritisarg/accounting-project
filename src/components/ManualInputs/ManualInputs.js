@@ -37,11 +37,10 @@ const manualInputs = (props) => {
           type='text'
         />
 
-        <button className={classes.Button} onClick={props.addEntry}>Submit</button>
+        <button className={classes.Button} onClick={props.submitResults}>Submit</button>
         
-        {//<button className={classes.Button} onClick={props.submitResults}>Submit</button>
-        }
     </div>
+
   );   
 };
 
