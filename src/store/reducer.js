@@ -1,9 +1,9 @@
 const initialReducer = {
     
     transactionInputs: [
-        {id: 1, xParty: "statePaul", yAction: "Funds", zParty: "stateSandra", amount: 100},
-        {id: 2, xParty: "stateEmily", yAction: "Loans", zParty: "stateJohn", amount: 200},
-        {id: 3, xParty: "stateMatt", yAction: "Repays", zParty: "stateMicheal", amount: 300},
+        {id: 1, xParty: "Paul", yAction: "Funds", zParty: "Sandra", amount: 100},
+        {id: 2, xParty: "Emily", yAction: "Loans", zParty: "John", amount: 200},
+        {id: 3, xParty: "Matt", yAction: "Repays", zParty: "Micheal", amount: 300},
     ],
     emptyInputs: false,
     toggle: false
@@ -12,11 +12,25 @@ const initialReducer = {
 const reducer = (state = initialReducer, action) => {
 
     if(action.type === 'SUBMIT'){
-        return{
-             ...state.transactionInputs,
-             transactionInputs: state.transactionInputs.concat(action.x)
-        };
-    }
+
+        if(action.x.xParty === null || action.x.zParty == null || 
+            action.x.yAction == null || action.x.amount == null){
+                return{
+                    ...state,
+                    emptyInputs: state.emptyInputs = true
+                }
+        }else{
+            return{
+                ...state.transactionInputs,
+                transactionInputs: state.transactionInputs.concat(action.x),
+                emptyInputs: state.emptyInputs = false,
+                xParty: state.xParty = null,
+                zParty: state.zParty = null,
+                yAction: state.yAction = null,
+                amount: state.amount = null
+            }
+        }
+    };
 
     if(action.type === 'DELETEITEM'){
         return{

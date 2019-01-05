@@ -71,8 +71,8 @@ class Transactions extends Component{
 	// }
 
     render(){		
-		let emptyBoxes = this.state.emptyInputs ? <p className={classes.errorMessage}>Enter a valid input</p>
-											: null
+		let emptyBoxes = this.props.transInput.emptyInputs ? <p className={classes.errorMessage}>Enter a valid input</p>
+											: false
         return(
             <Aux>
                 <h1 className={classes.h1}>Transaction page</h1>

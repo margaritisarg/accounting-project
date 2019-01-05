@@ -5,7 +5,7 @@ const inputs = (props) => {
   return(
     <div >
         <p className={classes.InputLayout} onClick={props.deleteItem}>
-           {props.xParty} {props.yAction} {props.zParty} - {props.amount}</p>
+           {props.xParty} {props.yAction} {props.zParty} - £{props.amount}</p>
     </div>
   );   
 };

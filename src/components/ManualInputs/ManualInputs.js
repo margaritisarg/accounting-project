@@ -37,7 +37,7 @@ const manualInputs = (props) => {
           type='text'
         />
 
-        <button className={classes.Button} onClick={props.submitResults}>Submit</button>
+        <button className={classes.buttonSubmit} onClick={props.submitResults}>Submit</button>
         
     </div>
 
