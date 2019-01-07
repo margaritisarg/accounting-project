@@ -5,17 +5,11 @@ import ManualInputs from '../components/ManualInputs/ManualInputs';
 import classes from './Transaction.css';
 import { connect } from 'react-redux';
 //import axios from 'axios';
+import Spinner from '../components/UI/Spinner/Spinner';
 
 class Transactions extends Component{
 
     state = {
-        transactionInputs: [
-            {id: 1, xParty: "Paul", yAction: "Funds", zParty: "Leon", amount: 100},
-            {id: 2, xParty: "Jerry", yAction: "Loans", zParty: "Tom", amount: 200},
-            {id: 3, xParty: "Sarah", yAction: "Repays", zParty: "Alex", amount: 300},
-		],
-		emptyInputs: false,
-		toggle: false
 	};
 
 	// componentDidMount(){
@@ -83,9 +77,15 @@ class Transactions extends Component{
 	// }
 
     render(){		
-		let emptyBoxes = this.props.transInput.emptyInputs ? <p className={classes.errorMessage}>Enter a valid input</p>
+		let emptyBoxes = this.props.transInput.emptyInputs ? <p className={classes.errorMessage}>Waiting for a valid input</p>
 											: false
-        return(
+		
+		let spinnerStyle = null;
+		if(this.props.transInput.loading){
+			spinnerStyle = <Spinner/>
+		}
+		
+		return(
             <Aux>
                 <h1 className={classes.h1}>Transaction page</h1>
 
@@ -103,6 +103,7 @@ class Transactions extends Component{
 					})}
 				</div>
 
+				{spinnerStyle}
 				{emptyBoxes}
 
 				<ManualInputs
@@ -140,8 +141,9 @@ const mapDispatchToProps = dispatch => {
             xParty: xParty,
             yAction: yAction,
             zParty: zParty,
-            amount: amount
-        }
+			amount: amount
+		},
+		loading: true
 		}),
 		
 		deleteItem: (selectedEntrysID) => dispatch({type: 'DELETEITEM', 

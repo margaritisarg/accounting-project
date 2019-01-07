@@ -8,27 +8,30 @@ const initialReducer = {
         {id: 3, xParty: "Matt", yAction: "Repays", zParty: "Micheal", amount: 300},
     ],
     emptyInputs: false,
-    toggle: false
+    loading: false
 };
 
 const reducer = (state = initialReducer, action) => {
 
     if(action.type === 'SUBMIT'){
 
-        if(action.x.xParty === null || action.x.zParty == null || 
-            action.x.yAction == null || action.x.amount == null){
+        if(action.x.xParty == null || action.x.zParty == null || 
+            action.x.yAction == null || action.x.amount == null ||
+            action.x.xParty === '' || action.x.zParty === '' || 
+            action.x.yAction === '' || action.x.amount === ''){
 
                 return{
                     ...state,
-                    emptyInputs: state.emptyInputs = true
+                    emptyInputs: state.emptyInputs = true,
+                    loading: state.emptyInputs = true
                 }
         }else{
 
-            const data = {
+            const stateTransactionInputsToFireBase = {
                 transactionInputs: state.transactionInputs.concat(action.x),
             }
 
-            axios.post('/transactions.json', data)
+            axios.post('/transactions.json', stateTransactionInputsToFireBase)
                 .then(response => console.log(response))
                 .catch(error => console.log(error));
 
@@ -36,6 +39,7 @@ const reducer = (state = initialReducer, action) => {
                 ...state.transactionInputs,
                 transactionInputs: state.transactionInputs.concat(action.x),
                 emptyInputs: state.emptyInputs = false,
+                loading: state.loading = false,
                 xParty: state.xParty = null,
                 zParty: state.zParty = null,
                 yAction: state.yAction = null,
