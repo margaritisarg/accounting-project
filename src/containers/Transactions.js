@@ -4,8 +4,10 @@ import Inputs from '../components/Inputs/Inputs';
 import ManualInputs from '../components/ManualInputs/ManualInputs';
 import classes from './Transaction.css';
 import { connect } from 'react-redux';
+//import axios from 'axios';
 
 class Transactions extends Component{
+
     state = {
         transactionInputs: [
             {id: 1, xParty: "Paul", yAction: "Funds", zParty: "Leon", amount: 100},
@@ -14,7 +16,17 @@ class Transactions extends Component{
 		],
 		emptyInputs: false,
 		toggle: false
-    };
+	};
+
+	// componentDidMount(){
+	// 	axios.get('/posts')
+	// 		.then(response => {
+	// 			console.log(response);
+	// 		})
+	// 		.catch(error => {
+	// 			console.log(error);
+	// 		});
+	// }
 
 	handleChangeXParty = value => {
 		this.setState({ ...this.state, xPartyinputValue: value });

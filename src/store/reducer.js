@@ -1,3 +1,5 @@
+import axios from '../axios-transactions';
+
 const initialReducer = {
     
     transactionInputs: [
@@ -15,11 +17,21 @@ const reducer = (state = initialReducer, action) => {
 
         if(action.x.xParty === null || action.x.zParty == null || 
             action.x.yAction == null || action.x.amount == null){
+
                 return{
                     ...state,
                     emptyInputs: state.emptyInputs = true
                 }
         }else{
+
+            const data = {
+                transactionInputs: state.transactionInputs.concat(action.x),
+            }
+
+            axios.post('/transactions.json', data)
+                .then(response => console.log(response))
+                .catch(error => console.log(error));
+
             return{
                 ...state.transactionInputs,
                 transactionInputs: state.transactionInputs.concat(action.x),
@@ -35,7 +47,8 @@ const reducer = (state = initialReducer, action) => {
     if(action.type === 'DELETEITEM'){
         return{
             ...state.transactionInputs,
-            transactionInputs : state.transactionInputs.filter(transInputs => transInputs.id !== action.selectedEntrysID)
+            transactionInputs : state.transactionInputs.filter(transInputs => 
+                transInputs.id !== action.selectedEntrysID)
         }      
     }
 
