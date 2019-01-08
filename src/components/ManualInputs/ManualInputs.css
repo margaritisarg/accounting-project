@@ -8,6 +8,7 @@
     position: fixed;
     align-content: flex-start;
     color: rgb(143, 142, 142);
+    border-color: rgb(218, 216, 216);
     text-align: center;
     font-family: 'Josefin Sans';
 }
@@ -15,6 +16,8 @@
 .xInput{
     left: 37%;
     transform: translate(-50%, -50%);
+    animation-name: exmaple;
+    animation-duration: 5s;
 }
 
 .zInput{
@@ -51,19 +54,54 @@
 }
 
 .buttonSubmit:hover{
-    border-color: rgb(20, 197, 14);
-    box-shadow: 3px 3px rgb(20, 197, 14);
-    border-color: rgb(20, 197, 14);
-    color: rgb(68, 156, 68);
     font-weight: bold;
     font-size: 1.15em;
-    border-right-color: lightgreen;
+    animation-name: colourFadeSubmitButton;
+    animation-duration: 0.4s;
+    animation-fill-mode: forwards;
 }
 
 .xInput:hover, .zInput:hover, .yInput:hover, .amountInput:hover{
-    box-shadow: 3px 3px black;
     font-weight: bold;
-    border-color: black;
+    animation-name: colourFadeInputBoxes;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes colourFadeInputBoxes {
+    0% {border-color: rgb(240, 240, 240);}
+    25% {border-color: rgb(161, 161, 161);}
+    50% {border-color: rgb(61, 60, 60);}
+    75% {border-color: rgb(63, 63, 63);}
+    100% {border-color: rgb(8, 8, 8);}
+
+    0% {box-shadow: 1px 1px rgb(240, 240, 240);}
+    25% {box-shadow: 1.5px 1.5px rgb(161, 161, 161);}
+    50% {box-shadow: 2px 2px rgb(61, 60, 60);}
+    75% {box-shadow: 2.5px 2.5px rgb(63, 63, 63);}
+    100% {box-shadow: 2.5px 2.5px rgb(8, 8, 8);}
+}
+
+@keyframes colourFadeSubmitButton {
+    0% {border-color: rgb(8, 22, 7);}
+    25% {border-color: rgb(14, 36, 13);}
+    50% {border-color: rgb(25, 70, 23);}
+    50% {border-right-color: lightgreen};
+    75% {border-color: rgb(35, 107, 32);}
+    100% {border-color: rgb(20, 197, 14);}
+    100% {border-right-color: lightgreen};
+
+    0% {box-shadow: 1px 1px rgb(8, 22, 7);}
+    25% {box-shadow: 1.5px 1.5px rgb(14, 36, 13);}
+    50% {box-shadow: 2px 2px rgb(25, 70, 23);}
+    75% {box-shadow: 2.2px 2.2px rgb(35, 107, 32);}
+    100% {box-shadow: 2.5px 2.5px rgb(20, 197, 14);}
+
+    0% {color: rgb(8, 22, 7);}
+    25% {color: rgb(14, 36, 13);}
+    50% {color: rgb(25, 70, 23);}
+    75% {color: rgb(35, 107, 32);}
+    100% {color: rgb(68, 156, 68);} 
 }
 
 
