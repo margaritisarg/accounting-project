@@ -2,16 +2,22 @@ import axios from '../axios-transactions';
 
 const initialReducer = {
     
-    transactionInputs: [
-        {id: 1, xParty: "Paul", yAction: "Funds", zParty: "Sandra", amount: 100},
-        {id: 2, xParty: "Emily", yAction: "Loans", zParty: "John", amount: 200},
-        {id: 3, xParty: "Matt", yAction: "Repays", zParty: "Micheal", amount: 300},
-    ],
+    transactionInputs: [],
     emptyInputs: false,
     loading: false
 };
 
 const reducer = (state = initialReducer, action) => {
+
+    if(action.type === 'SETUP'){
+        console.log('[REDUCER]')
+        console.log( action.setupData);
+
+        return{
+            ...state.transactionInputs,
+            transactionInputs: state.transactionInputs.concat(action.setupData),
+        }
+    }
 
     if(action.type === 'SUBMIT'){
 
@@ -31,8 +37,8 @@ const reducer = (state = initialReducer, action) => {
                 transactionInputs: state.transactionInputs.concat(action.x),
             }
 
-            axios.post('/transactions.json', stateTransactionInputsToFireBase)
-                .then(response => console.log(response))
+            axios.post('/transcations.json', stateTransactionInputsToFireBase)
+                .then(response => console.log('Success'))
                 .catch(error => console.log(error));
 
             return{

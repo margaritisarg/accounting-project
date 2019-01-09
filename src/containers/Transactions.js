@@ -6,21 +6,25 @@ import classes from './Transaction.css';
 import { connect } from 'react-redux';
 //import axios from 'axios';
 import Spinner from '../components/UI/Spinner/Spinner';
+import axios from '../axios-transactions';
 
 class Transactions extends Component{
 
     state = {
+		transactionInputs: [],
+		emptyInputs: false,
+		loading: false
 	};
 
-	// componentDidMount(){
-	// 	axios.get('/posts')
-	// 		.then(response => {
-	// 			console.log(response);
-	// 		})
-	// 		.catch(error => {
-	// 			console.log(error);
-	// 		});
-	// }
+	componentDidMount(){
+		axios.get('initialTrans.json')
+			.then(response => {
+				console.log(response);
+				this.setState({transactionInputs: response.data});
+				console.log(this.state);
+				this.props.setupAll(this.state.transactionInputs);
+			});
+	}
 
 	handleChangeXParty = value => {
 		this.setState({ ...this.state, xPartyinputValue: value });
@@ -84,12 +88,12 @@ class Transactions extends Component{
 		if(this.props.transInput.loading){
 			spinnerStyle = <Spinner/>
 		}
-		
-		return(
-            <Aux>
-                <h1 className={classes.h1}>Transaction page</h1>
 
-				<div className={classes.resultborder}>
+		let displayRecords = <Spinner/>
+
+		if(this.props.transInput){
+			displayRecords = (	
+					<div className={classes.resultborder}>
 					{this.props.transInput.transactionInputs.map(data => {
 						return (
 							<Inputs
@@ -102,7 +106,13 @@ class Transactions extends Component{
 						);
 					})}
 				</div>
+			)}
+			
+		return(
+            <Aux>
+                <h1 className={classes.h1}>Transaction page</h1>
 
+				{displayRecords}
 				{spinnerStyle}
 				{emptyBoxes}
 
@@ -148,8 +158,10 @@ const mapDispatchToProps = dispatch => {
 		
 		deleteItem: (selectedEntrysID) => dispatch({type: 'DELETEITEM', 
 		selectedEntrysID: selectedEntrysID
-		})
-    };
+		}),
+	
+		setupAll: (data) => dispatch({type: 'SETUP', setupData: data})
+	};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Transactions);
