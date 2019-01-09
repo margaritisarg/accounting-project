@@ -38,7 +38,7 @@
 
 .buttonSubmit{
     display: block;
-    width: 100px;
+    width: 130px;
     height: 40px;
     position: fixed;
     border-color: black;
@@ -50,7 +50,8 @@
     background-color: white;
     padding: 3px;
     font-family: 'Josefin Sans';
-    font-size: 1.1em
+    font-size: 1.1em;
+    border-radius: 100px;
 }
 
 .buttonSubmit:hover{

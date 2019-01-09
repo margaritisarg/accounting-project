@@ -10,12 +10,10 @@ const initialReducer = {
 const reducer = (state = initialReducer, action) => {
 
     if(action.type === 'SETUP'){
-        console.log('[REDUCER]')
-        console.log( action.setupData);
-
+     //   console.log(action.setupData)
         return{
             ...state.transactionInputs,
-            transactionInputs: state.transactionInputs.concat(action.setupData),
+            transactionInputs: state.transactionInputs.concat(action.setupData),        
         }
     }
 
@@ -32,12 +30,14 @@ const reducer = (state = initialReducer, action) => {
                     loading: state.emptyInputs = true
                 }
         }else{
+            const stateTransactionInputsToFireBase = action.x
 
-            const stateTransactionInputsToFireBase = {
-                transactionInputs: state.transactionInputs.concat(action.x),
-            }
+            console.log('BEFORE FIREBASE')
+            console.log(stateTransactionInputsToFireBase)
+            console.log('AFTER FIREBASE')
+            console.log(state)
 
-            axios.post('/transcations.json', stateTransactionInputsToFireBase)
+            axios.post('/initialTrans.json', stateTransactionInputsToFireBase)
                 .then(response => console.log('Success'))
                 .catch(error => console.log(error));
 

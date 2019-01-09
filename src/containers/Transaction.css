@@ -2,6 +2,8 @@
 
 .h1{
     text-align: center;
+    font-style: oblique;
+
     font-family: 'Josefin Sans';
     margin-bottom: 40px;
 }

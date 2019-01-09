@@ -4,7 +4,6 @@ import Inputs from '../components/Inputs/Inputs';
 import ManualInputs from '../components/ManualInputs/ManualInputs';
 import classes from './Transaction.css';
 import { connect } from 'react-redux';
-//import axios from 'axios';
 import Spinner from '../components/UI/Spinner/Spinner';
 import axios from '../axios-transactions';
 
@@ -19,11 +18,14 @@ class Transactions extends Component{
 	componentDidMount(){
 		axios.get('initialTrans.json')
 			.then(response => {
-				console.log(response);
-				this.setState({transactionInputs: response.data});
-				console.log(this.state);
+				this.setState({transactionInputs: Object.values(response.data).filter(record =>
+					record != null)
+				});
+					
 				this.props.setupAll(this.state.transactionInputs);
-			});
+				//console.log(this.state.transactionInputs)
+			})
+			.catch(error => console.log(error));
 	}
 
 	handleChangeXParty = value => {
@@ -80,6 +82,7 @@ class Transactions extends Component{
 	// 	this.setState({transactionInputs: newState})
 	// }
 
+
     render(){		
 		let emptyBoxes = this.props.transInput.emptyInputs ? <p className={classes.errorMessage}>Waiting for a valid input</p>
 											: false
@@ -90,23 +93,26 @@ class Transactions extends Component{
 		}
 
 		let displayRecords = <Spinner/>
-
+		
 		if(this.props.transInput){
 			displayRecords = (	
-					<div className={classes.resultborder}>
-					{this.props.transInput.transactionInputs.map(data => {
-						return (
-							<Inputs
-								key={data.id}
-								xParty={data.xParty}
-								zParty={data.zParty}
-								yAction={data.yAction}
-								amount={data.amount}
-								deleteItem={() => this.props.deleteItem(data.id)}/>
-						);
-					})}
+				<div className={classes.resultborder}>
+					{this.props.transInput.transactionInputs.map(data => 
+						{
+							return (
+								<Inputs
+									key={data.id}
+									xParty={data.xParty}
+									zParty={data.zParty}
+									yAction={data.yAction}
+									amount={data.amount}
+									deleteItem={() => this.props.deleteItem(data.id)}/>
+							);
+						}
+					)}
 				</div>
 			)}
+
 			
 		return(
             <Aux>
@@ -131,8 +137,7 @@ class Transactions extends Component{
 					handleChangeZParty={this.handleChangeZParty}
 					handleChangeyAction={this.handleChangeyAction}
 				/>
-			</Aux>       
-			
+			</Aux>       		
         );
     }
 }
