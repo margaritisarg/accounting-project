@@ -1,7 +1,6 @@
 import axios from '../axios-transactions';
 
-const initialReducer = {
-    
+const initialReducer = {   
     transactionInputs: [],
     emptyInputs: false,
     loading: false
@@ -10,10 +9,10 @@ const initialReducer = {
 const reducer = (state = initialReducer, action) => {
 
     if(action.type === 'SETUP'){
-     //   console.log(action.setupData)
         return{
             ...state.transactionInputs,
-            transactionInputs: state.transactionInputs.concat(action.setupData),        
+            transactionInputs: state.transactionInputs.concat(action.setupData),       
+
         }
     }
 
@@ -31,11 +30,6 @@ const reducer = (state = initialReducer, action) => {
                 }
         }else{
             const stateTransactionInputsToFireBase = action.x
-
-            console.log('BEFORE FIREBASE')
-            console.log(stateTransactionInputsToFireBase)
-            console.log('AFTER FIREBASE')
-            console.log(state)
 
             axios.post('/initialTrans.json', stateTransactionInputsToFireBase)
                 .then(response => console.log('Success'))
@@ -55,13 +49,23 @@ const reducer = (state = initialReducer, action) => {
     };
 
     if(action.type === 'DELETEITEM'){
+
+        if(!action.selectedEntrysID){
+
+        }
+
+        axios.delete('/initialTrans/' + action.selectedEntrysID + '.json', {
+            data: {id: action.wholeData.id}
+            }).then(response => console.log(response))
+            .catch(error => console.log(error));
+
         return{
             ...state.transactionInputs,
             transactionInputs : state.transactionInputs.filter(transInputs => 
-                transInputs.id !== action.selectedEntrysID)
+                transInputs.id !== action.wholeData.id)
+
         }      
     }
-
     return state;
 };
 

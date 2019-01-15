@@ -58,14 +58,14 @@
     font-weight: bold;
     font-size: 1.15em;
     animation-name: colourFadeSubmitButton;
-    animation-duration: 0.4s;
+    animation-duration: 0.15s;
     animation-fill-mode: forwards;
 }
 
 .xInput:hover, .zInput:hover, .yInput:hover, .amountInput:hover{
     font-weight: bold;
     animation-name: colourFadeInputBoxes;
-    animation-duration: 0.5s;
+    animation-duration: 0.2s;
     animation-fill-mode: forwards;
 }
 

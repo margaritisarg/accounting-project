@@ -19,7 +19,7 @@
     font-weight: bold;
     padding:8px;
     animation-name: recordItem;
-    animation-duration: 0.25s;
+    animation-duration: 0.15s;
     animation-fill-mode: forwards;
 }
 
