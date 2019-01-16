@@ -1,4 +1,5 @@
 import axios from '../axios-transactions';
+import * as actionTypes from '../store/actions/actions';
 
 const initialReducer = {   
     transactionInputs: [],
@@ -8,7 +9,7 @@ const initialReducer = {
 
 const reducer = (state = initialReducer, action) => {
 
-    if(action.type === 'SETUP'){
+    if(action.type === actionTypes.SETUP){
         return{
             ...state.transactionInputs,
             transactionInputs: state.transactionInputs.concat(action.setupData),       
@@ -16,7 +17,7 @@ const reducer = (state = initialReducer, action) => {
         }
     }
 
-    if(action.type === 'SUBMIT'){
+    if(action.type === actionTypes.SUBMIT){
 
         if(action.x.xParty == null || action.x.zParty == null || 
             action.x.yAction == null || action.x.amount == null ||
@@ -48,7 +49,7 @@ const reducer = (state = initialReducer, action) => {
         }
     };
 
-    if(action.type === 'DELETEITEM'){
+    if(action.type === actionTypes.DELETEITEM){
 
         if(!action.selectedEntrysID){
 

@@ -6,6 +6,7 @@ import classes from './Transaction.css';
 import { connect } from 'react-redux';
 import Spinner from '../components/UI/Spinner/Spinner';
 import axios from '../axios-transactions';
+import * as actionTypes from '../store/actions/actions';
 
 class Transactions extends Component{
 
@@ -165,7 +166,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 
     return {
-        submitResults: (xParty, zParty, yAction, amount) => dispatch({type: 'SUBMIT', x: {
+        submitResults: (xParty, zParty, yAction, amount) => dispatch({type: actionTypes.SUBMIT, x: {
             id: Math.random(),
             xParty: xParty,
             yAction: yAction,
@@ -175,12 +176,12 @@ const mapDispatchToProps = dispatch => {
 		loading: true
 		}),
 		
-		deleteItem: (selectedEntrysID, wholeData) => dispatch({type: 'DELETEITEM', 
+		deleteItem: (selectedEntrysID, wholeData) => dispatch({type: actionTypes.DELETEITEM, 
 		selectedEntrysID: selectedEntrysID,
 		wholeData: wholeData
 		}),
 	
-		setupAll: (data) => dispatch({type: 'SETUP', setupData: data})
+		setupAll: (data) => dispatch({type: actionTypes.SETUP, setupData: data})
 	};
 };
 
