@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import Spinner from '../components/UI/Spinner/Spinner';
 import axios from '../axios-transactions';
 import * as actionTypes from '../store/actions/actions';
+//import { setup, deleteItem, submitResults } from '../store/actions/actions';
+import { setup, deleteItem } from '../store/actions/actions';
 
 class Transactions extends Component{
 
@@ -38,7 +40,7 @@ class Transactions extends Component{
 				record != null ),
 			});			
 
-			this.props.setupAll(this.state.transactionInputs);
+			this.props.setup(this.state.transactionInputs);
 		}).catch(error => console.log(error));
 	};
 
@@ -166,7 +168,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 
     return {
-        submitResults: (xParty, zParty, yAction, amount) => dispatch({type: actionTypes.SUBMIT, x: {
+        submitResults: (xParty, zParty, yAction, amount) => dispatch({type: actionTypes.SUBMITRESULTS, x: {
             id: Math.random(),
             xParty: xParty,
             yAction: yAction,
@@ -175,13 +177,10 @@ const mapDispatchToProps = dispatch => {
 		},
 		loading: true
 		}),
-		
-		deleteItem: (selectedEntrysID, wholeData) => dispatch({type: actionTypes.DELETEITEM, 
-		selectedEntrysID: selectedEntrysID,
-		wholeData: wholeData
-		}),
+
+		deleteItem: (selectedEntrysID, wholeData) => dispatch(deleteItem(selectedEntrysID, wholeData)),
 	
-		setupAll: (data) => dispatch({type: actionTypes.SETUP, setupData: data})
+		setup: (data) => dispatch(setup(data))
 	};
 };
 

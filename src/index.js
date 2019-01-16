@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
 import reducer from '../src/store/reducer';
 import { Provider } from 'react-redux';
 import axios from 'axios';
@@ -31,9 +32,9 @@ axios.interceptors.response.use(response => {
 const logger = store => {
     return next => {
         return action => {
-            console.log('[Middleware] Dispatching', action);
+         //   console.log('[Middleware] Dispatching', action);
             const result = next(action);
-            console.log('[Middleware] next state', store.getState());
+        //    console.log('[Middleware] next state', store.getState());
             return result;
         }
     }
@@ -41,7 +42,7 @@ const logger = store => {
 
 const composeEnchancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(reducer, composeEnchancers(applyMiddleware(logger)));
+const store = createStore(reducer, composeEnchancers(applyMiddleware(logger, thunk)));
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 

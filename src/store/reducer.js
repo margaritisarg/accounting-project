@@ -9,6 +9,7 @@ const initialReducer = {
 
 const reducer = (state = initialReducer, action) => {
 
+    //Setup
     if(action.type === actionTypes.SETUP){
         return{
             ...state.transactionInputs,
@@ -17,7 +18,8 @@ const reducer = (state = initialReducer, action) => {
         }
     }
 
-    if(action.type === actionTypes.SUBMIT){
+    //Submit results
+    if(action.type === actionTypes.SUBMITRESULTS){
 
         if(action.x.xParty == null || action.x.zParty == null || 
             action.x.yAction == null || action.x.amount == null ||
@@ -49,11 +51,10 @@ const reducer = (state = initialReducer, action) => {
         }
     };
 
+    //Delete record
     if(action.type === actionTypes.DELETEITEM){
 
-        if(!action.selectedEntrysID){
-
-        }
+        //console.log(action.wholeData)
 
         axios.delete('/initialTrans/' + action.selectedEntrysID + '.json', {
             data: {id: action.wholeData.id}
